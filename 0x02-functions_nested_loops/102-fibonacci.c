@@ -9,7 +9,7 @@ int main(void)
 	long int i, j, c, count;
 
 	i = 0;
-	j = 0;
+	j = 1;
 	for (count = 0; count < 50; count++)
 	{
 		c = i + j;
