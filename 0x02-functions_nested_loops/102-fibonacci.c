@@ -19,6 +19,6 @@ int main(void)
 		if (count == 49)
 			putchar('\n');
 		else
-			putchar(', ');
+			printf(", ");
 	}
 }
