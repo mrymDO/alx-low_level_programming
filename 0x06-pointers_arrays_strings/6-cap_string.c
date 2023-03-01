@@ -21,7 +21,7 @@ char *cap_string(char *str)
 
 		for (j = 0; separators[j]; j++)
 		{
-			if (str[i - 1] == separators[j] && str[i] >= 'a' && str[i] <= 'z')
+			if (str[i - 1] == separators[j])
 				str[i] -= delt;
 		}
 		i++;
