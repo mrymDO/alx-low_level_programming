@@ -11,7 +11,7 @@ char *cap_string(char *str)
 	int i, j;
 	int delt = 'a' - 'A';
 	int separators[] = {',', ';', '.', '?', '"',
-			    '(', ')', '{', '}', ' ', '\n', '\t'};
+			    '(', ')', '{', '}', ' ', '\n', '\t', ':'};
 
 	i = 0;
 	while (str[i])
