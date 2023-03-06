@@ -3,8 +3,7 @@
  * _strpbrk - searches a string for any set of bytes
  * @s: string to be scanned
  * @accept: string containing character to match
- * Return: point to a character in s that matches in accept
- * Otherwise it returns NULL of no match found
+ * Return: a character in s that matches in accept. else NULL
  */
 
 char *_strpbrk(char *s, char *accept)
@@ -18,6 +17,7 @@ char *_strpbrk(char *s, char *accept)
 			if (*s == accept[j])
 				return (s);
 		}
+		s++;
 	}
 	return ('\0');
 }
