@@ -4,7 +4,7 @@
 /**
  *  print_diagsums - prints sum of two diagonals of matrix of integers
  *  @a: array
- *  size: size of array
+ *  @size: size of array
  *  Return: Void
  */
 
