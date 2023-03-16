@@ -6,6 +6,7 @@ int _isdigit(int c);
 int _atoi(char *s);
 int _strlen(char *s);
 char *_strcpy(char *s1, char *s2);
+int _print(void);
 
 /**
  * main - multiply 2 positive numbers
@@ -21,7 +22,7 @@ int main(int argc, char **argv)
 	int i, n1, n2, result;
 
 	if (argc != 3)
-	{	printf("Error\n");
+	{	_print();
 		exit(98);
 	}
 
@@ -30,7 +31,7 @@ int main(int argc, char **argv)
 
 	if (num1 == NULL || num2 == NULL)
 	{
-		printf("Error\n");
+		_print();
 		exit(98);
 	}
 	_strcpy(num1, argv[1]);
@@ -40,7 +41,7 @@ int main(int argc, char **argv)
 	{
 		if (!_isdigit(num1[i]))
 		{
-			printf("Error\n");
+			_print();
 			free(num1);
 			free(num2);
 			exit(98);
@@ -51,7 +52,7 @@ int main(int argc, char **argv)
 	{
 		if (!_isdigit(num2[i]))
 		{
-			printf("Error\n");
+			_print();
 			free(num1);
 			free(num2);
 			exit(98);
@@ -148,4 +149,20 @@ char *_strcpy(char *s1, char *s2)
 	s1[i] = '\0';
 
 	return (s1);
+}
+
+/**
+ * _print - prints Error and a new line
+ * Return: Always 0
+ */
+int _print(void)
+{
+	_putchar('E');
+	_putchar('r');
+	_putchar('r');
+	_putchar('o');
+	_putchar('r');
+	_putchar('\n');
+
+	return (0);
 }
