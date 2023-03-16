@@ -1,12 +1,12 @@
 #include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 int _isdigit(int c);
 int _atoi(char *s);
 int _strlen(char *s);
 char *_strcpy(char *s1, char *s2);
 int _print(void);
+void print_digit(int result);
 
 /**
  * main - multiply 2 positive numbers
@@ -63,7 +63,9 @@ int main(int argc, char **argv)
 
 	result = n1 * n2;
 
-	printf("%d\n", result);
+	print_digit(result);
+
+	_putchar('\n');
 
 	free(num1);
 	free(num2);
@@ -165,4 +167,19 @@ int _print(void)
 	_putchar('\n');
 
 	return (0);
+}
+/**
+ * print_digit - print number
+ * @result: input
+ * Return: void
+ */
+void print_digit(int result)
+{
+	if (result < 10)
+	{
+		_putchar(result + '0');
+		return;
+	}
+	print_digit(result / 10);
+	_putchar(result % 10 + '0');
 }
