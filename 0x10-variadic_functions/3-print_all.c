@@ -45,8 +45,6 @@ void print_all(const char * const format, ...)
 				else
 					printf("(nil)");
 				break;
-			default:
-				break;
 		} i++;
 	}
 	va_end(args), printf("\n");
