@@ -42,7 +42,7 @@ void print_all(const char * const format, ...)
 				s = va_arg(args, char *), printed = 1;
 				if (s != NULL)
 					printf("%s", s);
-				else
+				break;
 					printf("(nil)");
 				break;
 		} i++;
