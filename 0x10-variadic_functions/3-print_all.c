@@ -40,10 +40,12 @@ void print_all(const char * const format, ...)
 				break;
 			case 's':
 				s = va_arg(args, char *), printed = 1;
-				if (s != NULL)
-					printf("%s", s);
-				break;
+				if (s == NULL)
+				{
 					printf("(nil)");
+				break;
+				}
+				printf("%s", s);
 				break;
 		} i++;
 	}
