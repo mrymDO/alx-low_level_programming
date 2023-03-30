@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
- * free_list: function that frees memory allocated to each node
+ * free_list - function that frees memory allocated to each node
  * of the linked list
  * @head: pointer to the head of linked list of type list_t
  * Return: void
@@ -10,15 +10,15 @@
 
 void free_list(list_t *head)
 {
-	list_t *current = head;
-	list_t *next_node = NULL;
+	list_t *current;
 
 
-	while (current->next != NULL)
+	while (head != NULL)
 	{
-		next_node = current->next;
+		current = head;
+		head   = head->next;
+		free(current->str);
 		free(current);
-		current = next_node;
 	}
 }
 
