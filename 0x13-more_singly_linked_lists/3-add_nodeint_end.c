@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
- * add_node_end - Adds a new node at the end of a list
+ * add_nodeint_end - Adds a new node at the end of a list
  * @head: a pointer to a pointer to the head of the list
  * @n: value stored in node
  * Return: a pointer to the new node, NULL if it failed
