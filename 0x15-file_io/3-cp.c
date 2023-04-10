@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: %s file_from file_to\n", argv[0]);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
 	copy_file(argv[1], argv[2]);
@@ -31,16 +31,19 @@ void copy_file(char *file_from, char *file_to)
 {
 	int fd_to, fd_from;
 	char buffer[SIZE];
-	ssize_t n_read, n_written;
+	ssize_t n_read;
+
+	fd_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR |
+			S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 
 	fd_from = open(file_from, O_RDONLY);
+
 	if (fd_from == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: can't read from file %s\n", file_from);
 		exit(98);
 	}
 
-	fd_to = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (fd_to == -1)
 	{
 		close(fd_from);
@@ -50,8 +53,7 @@ void copy_file(char *file_from, char *file_to)
 
 	while ((n_read = read(fd_from, buffer, SIZE)) > 0)
 	{
-		n_written = write(fd_to, buffer, n_read);
-		if (n_written == -1 || n_written != n_read)
+		if (write(fd_to, buffer, n_read) != n_read)
 		{
 			dprintf(STDERR_FILENO, "Error, Can't write to file %s\n", file_to);
 			exit(99);
