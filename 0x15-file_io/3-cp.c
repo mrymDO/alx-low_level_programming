@@ -30,12 +30,8 @@ int main(int argc, char **argv)
 void copy_file(char *file_from, char *file_to)
 {
 	int fd_to, fd_from;
-	char *buffer;
+	char buffer[SIZE];
 	ssize_t n_read, n_written;
-
-	buffer = malloc(sizeof(char) * SIZE);
-	if (buffer == NULL)
-		return;
 
 	fd_from = open(file_from, O_RDONLY);
 	if (fd_from == -1)
@@ -44,11 +40,12 @@ void copy_file(char *file_from, char *file_to)
 		exit(98);
 	}
 
-	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0664);
 	if (fd_to == -1)
 	{
-	dprintf(STDERR_FILENO, "Error, Can't write to file %s\n", file_to);
-	exit(99);
+		close(fd_from);
+		dprintf(STDERR_FILENO, "Error, Can't write to file %s\n", file_to);
+		exit(99);
 	}
 
 	while ((n_read = read(fd_from, buffer, SIZE)) > 0)
@@ -66,7 +63,6 @@ void copy_file(char *file_from, char *file_to)
 		dprintf(STDERR_FILENO, "Error: can't read from file %s\n", file_from);
 		exit(98);
 	}
-	free(buffer);
 	close_file(fd_from);
 	close_file(fd_to);
 }
