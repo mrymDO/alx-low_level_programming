@@ -50,7 +50,7 @@ void copy_file(char *file_from, char *file_to)
 		exit(98);
 	}
 
-	while ((n_read = read(fd_from, buffer, SIZE)) > 0)
+	while ((n_read = read(fd_from, buffer, sizeof(buffer))) > 0)
 	{
 		if (write(fd_to, buffer, n_read) != n_read)
 		{
