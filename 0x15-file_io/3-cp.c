@@ -27,18 +27,18 @@ int main(int argc, char **argv)
 		dprintf(STDERR_FILENO, "Error: can't read from file %s\n", argv[1]);
 		exit(98);
 	}
-	fd_to = open(argv[2], O_CREAT | O_WRONLY | O_APPEND | O_TRUNC, S_IRUSR |
+	fd_to = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR |
 			S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 	if (fd_to == -1)
 	{
-		dprintf(STDERR_FILENO, "Error, Can't write to file %s\n", argv[2]);
+		dprintf(STDERR_FILENO, "Error, Can't write to %s\n", argv[2]);
 		exit(99);
 	}
 	while ((n_read = read(fd_from, buffer, sizeof(buffer))) > 0)
 	{
 		if (write(fd_to, buffer, n_read) != n_read)
 		{
-			dprintf(STDERR_FILENO, "Error, Can't write to file %s\n", argv[2]);
+			dprintf(STDERR_FILENO, "Error, Can't write to %s\n", argv[2]);
 			exit(99);
 		}
 	}
