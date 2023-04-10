@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
-#define SIZE 1024
+
 /**
  * main - a program that copies the content of a file to another file
  * @argc: number of argument
@@ -13,7 +13,7 @@
 int main(int argc, char **argv)
 {
 	int fd_to, fd_from;
-	char buffer[SIZE];
+	char buffer[1024];
 	ssize_t n_read;
 
 	if (argc != 3)
@@ -36,10 +36,10 @@ int main(int argc, char **argv)
 	}
 	while ((n_read = read(fd_from, buffer, sizeof(buffer))) > 0)
 	{
+		if (n_read == 0)
+			break;
 		if (write(fd_to, buffer, n_read) != n_read)
 		{
-			close_file(fd_to);
-			close_file(fd_from);
 			dprintf(STDERR_FILENO, "Error, Can't write to file %s\n", argv[2]);
 			exit(99);
 		}
