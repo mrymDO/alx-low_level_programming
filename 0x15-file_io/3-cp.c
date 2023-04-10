@@ -33,21 +33,19 @@ int main(int argc, char **argv)
 		dprintf(STDERR_FILENO, "Error, Can't write to %s\n", argv[2]);
 		exit(99);
 	}
-	n_read = read(fd_from, buffer, SIZE);
-	if (n_read == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-	while (n_read > 0)
+	while ((n_read = read(fd_from, buffer, SIZE)) > 0)
 	{
 		n_written = write(fd_to, buffer, n_read);
-		if (n_written == -1)
+		if (n_written == -1 || n_written != n_read)
 		{
 			dprintf(STDERR_FILENO, "Error, Can't write to %s\n", argv[2]);
 			exit(99);
 		}
-		n_read = read(fd_from, buffer, SIZE);
+	}
+	if (n_read == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: can't read from file %s\n", argv[1]);
+		exit(98);
 	}
 	close_file(fd_to);
 	close_file(fd_from);
