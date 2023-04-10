@@ -36,8 +36,6 @@ int main(int argc, char **argv)
 	}
 	while ((n_read = read(fd_from, buffer, sizeof(buffer))) > 0)
 	{
-		if (n_read == 0)
-			break;
 		if (write(fd_to, buffer, n_read) != n_read)
 		{
 			dprintf(STDERR_FILENO, "Error, Can't write to file %s\n", argv[2]);
