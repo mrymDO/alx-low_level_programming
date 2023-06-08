@@ -16,7 +16,9 @@ hash_table_t *hash_table_create(unsigned long int size)
 		return (NULL);
 
 	table->size = size;
-	table->array = calloc(table->size, sizeof(hash_node_t));
+	table->array = malloc(sizeof(hash_node_t*) * size);
+	if (table->array == NULL)
+		return (NULL);
 
 	for (i = 0; i < table->size; i++)
 	{
@@ -25,6 +27,12 @@ hash_table_t *hash_table_create(unsigned long int size)
 	return (table);
 }
 
+/**
+ * create_item - create a new item in the array
+ * @key: position at the array
+ * @value: the value assigned at a specific position
+ * Return: new element in the array of linked list
+ */
 hash_node_t *create_item(char *key, char *value)
 {
 	hash_node_t *item;
